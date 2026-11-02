@@ -99,7 +99,7 @@ nav{background:linear-gradient(180deg,#141414eb,#1414148c);border-bottom:0;backd
 @media(max-width:1100px){.nav-inner{width:calc(100% - 45px)}.links{gap:22px}.hero-layout{width:calc(100% - 75px)}.hero h1{font-size:clamp(68px,8.4vw,110px)}.hero-portrait{right:-6%;width:61%}.hero-portrait img{height:82svh;min-height:560px}}
 @media(max-width:800px){.nav-inner{min-height:76px}.nav-cta{padding:9px 12px;font-size:12px}.links{gap:12px}.links a{font-size:12px}.hero{padding:88px 0 0;min-height:0}.hero-layout{width:calc(100% - 40px);display:flex;flex-direction:column;min-height:0;align-items:stretch}.hero-copy{order:1;padding:28px 0 0;z-index:3}.hero-portrait{order:2;position:relative;top:auto;right:auto;bottom:auto;width:100%;height:55svh;min-height:410px;max-height:600px;justify-content:center;align-items:flex-end;margin-top:-30px}.hero-portrait img,.hero-portrait img[style]{height:100%;min-height:0;max-width:100%;width:auto;transform:none}.hero h1{font-size:clamp(66px,10.5vw,100px)}.hero p.lead{margin:14px 0}.hero-socials{margin-top:19px}.hero .actions{margin:19px 0}}
 @media(max-width:560px){.nav-inner{width:calc(100% - 28px);gap:10px;min-height:65px}.logo{font-size:22px}.links{gap:9px;overflow:auto}.links a{font-size:11px;padding:18px 0}.links a:first-child:after{bottom:5px}.links a:nth-child(4){display:none}.nav-cta{font-size:10px;padding:8px 9px}.hero{padding-top:69px}.hero-layout{width:calc(100% - 36px)}.hero-copy{padding-top:26px}.hero .kicker{font-size:12px}.hero h1{font-size:clamp(52px,13vw,75px);letter-spacing:-.055em}.hero .subtitle{font-size:13px}.hero p.lead{font-size:15px}.hero-socials a{width:45px;height:45px}.hero-portrait{height:47svh;min-height:300px;margin-top:-8px}}
-</style></head><body>
+#edit-open,#admin-overlay{display:none!important}</style></head><body>
 <nav><div class="container nav-inner"><a class="logo" href="#home">Portfolio<span>.</span></a><div class="links"><a href="#home">Home</a><a href="#about">About</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#contact">Contact</a></div><a class="nav-cta" href="#contact">Let's Connect ↗</a></div></nav>
 <header class="hero" id="home"><video aria-hidden="true" autoplay="" loop="" muted="" playsinline="" preload="metadata"><source src="assets/videos/portfolio-background.mp4" type="video/mp4"/></video><div class="hero-layout"><div class="hero-copy"><div class="kicker">HELLO, MY NAME IS</div><h1>Kanil<br/><em>Kanchana</em></h1><div class="subtitle">COMPUTER SCIENCE WITH AI STUDENT</div><p class="lead">Web development  /  Backend systems  /  Artificial intelligence</p><div aria-label="Social profiles" class="hero-socials">
 <a aria-label="LinkedIn" data-social="linkedin" href="#contact"><svg viewbox="0 0 24 24"><path d="M20.45 2H3.55A1.55 1.55 0 0 0 2 3.55v16.9A1.55 1.55 0 0 0 3.55 22h16.9A1.55 1.55 0 0 0 22 20.45V3.55A1.55 1.55 0 0 0 20.45 2ZM8 19H5V9h3v10ZM6.5 7.7a1.7 1.7 0 1 1 0-3.4 1.7 1.7 0 0 1 0 3.4ZM19 19h-3v-5.1c0-1.3-.5-2.1-1.6-2.1-1.2 0-1.8.8-1.8 2.1V19h-3V9h3v1.4c.6-1 1.7-1.7 3-1.7 2.2 0 3.4 1.4 3.4 4.2V19Z"></path></svg></a>
@@ -127,8 +127,24 @@ function status(t){$('#admin-status').textContent=t}
 function add(parent,tag,cls,text){let n=el(tag,cls,text);parent.append(n);return n}
 function setText(selector,text){let n=$(selector);if(n)n.textContent=text||''}
 window.portfolioLoad=(obj)=>{if(obj&&obj.profile){data={...clone(defaults),...obj};render()}};
+
+ // Link hero social icons directly to the profile URLs. Never silently jump to #contact.
+ function updateSocialLinks(){
+   const p=data.profile||{};
+   document.querySelectorAll('.hero-socials a[data-social]').forEach(a=>{
+     let raw=String(p[a.dataset.social]||'').trim();
+     // Accept a full http(s) URL, or a domain without the protocol.
+     let candidate=raw;
+     if(raw && !/^[a-z][a-z0-9+.-]*:/i.test(raw) && /^[^\s/]+\.[^\s]+/.test(raw))candidate='https://'+raw;
+     let valid=false;
+     try{let u=new URL(candidate);valid=(u.protocol==='https:'||u.protocol==='http:')&&u.hostname.includes('.');if(valid)candidate=u.href}catch(e){}
+     if(valid){a.href=candidate;a.target='_blank';a.rel='noopener noreferrer';a.removeAttribute('aria-disabled');a.title='Open '+a.dataset.social+' profile';a.style.display='inline-flex'}
+     else {a.removeAttribute('href');a.removeAttribute('target');a.setAttribute('aria-disabled','true');a.title='Add a '+a.dataset.social+' link in the dashboard';a.style.display='none'}
+   });
+ }
+
 function render(){
- const p=data.profile||defaults.profile;
+ const p=data.profile||defaults.profile; updateSocialLinks();
  let hero=$('.hero h1');if(hero){let parts=(p.name||'Kanil Kanchana').trim().split(/\s+/);hero.replaceChildren(document.createTextNode(parts[0]||''),document.createElement('br'));let em=document.createElement('em');em.textContent=parts.slice(1).join(' ')||' ';hero.append(em)}
  let portrait=$('.hero-portrait img');if(portrait&&p.photo)portrait.src=p.photo;setText('.hero .subtitle',p.role);setText('.hero .lead',p.intro);
  setText('.profile-card h3','Professional Profile');let facts=$$('.profile-card .fact');if(facts[0])facts[0].querySelector('span').replaceChildren(...factNodes('Based in',p.location));if(facts[1])facts[1].querySelector('span').replaceChildren(...factNodes('Currently studying',p.education));if(facts[2])facts[2].querySelector('span').replaceChildren(...factNodes('Availability',p.availability));
@@ -161,4 +177,4 @@ function render(){
  function download(name,content,type){let blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
  function exportHTML(){let copy=document.documentElement.cloneNode(true);copy.querySelector('#admin-overlay')?.remove();copy.querySelector('#edit-open')?.remove();copy.querySelectorAll('script').forEach(s=>s.remove());let html='<!doctype html>\n'+copy.outerHTML;download('index.html',html,'text/html;charset=utf-8');status('Published HTML downloaded. Upload it alongside your portrait and video files.')}
  $('#edit-open').onclick=()=>{$('#admin-overlay').hidden=false;document.body.style.overflow='hidden';edit()};$('#edit-close').onclick=()=>{$('#admin-overlay').hidden=true;document.body.style.overflow=''};document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#admin-overlay').hidden)$('#edit-close').click()});render();
-})();</script><script>fetch('site-data.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{if(d&&window.portfolioLoad)window.portfolioLoad(d)}).catch(()=>{});</script><script>(function(){function updateLinks(d){var p=d&&d.profile||{};document.querySelectorAll('.hero-socials a[data-social]').forEach(function(a){var u=p[a.dataset.social];if(typeof u==='string' && u.startsWith("https://")){a.href=u;a.target='_blank';a.rel='noopener noreferrer'}else{a.href='#contact';a.removeAttribute('target')}})}fetch('site-data.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{if(d)updateLinks(d)}).catch(()=>{});})();</script></body></html>
+})();</script><script>fetch('site-data.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{if(d&&window.portfolioLoad)window.portfolioLoad(d)}).catch(()=>{});</script></body></html>

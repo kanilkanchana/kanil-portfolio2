@@ -30,3 +30,12 @@ If you need an actual password-protected admin that publishes changes instantly,
 
 ## Cinematic refresh
 The provided photo is included and transparent padding has been trimmed, without cropping the actual person. The top page follows the dark charcoal/orange reference layout. Social icons use the URLs in site-data.json, and fall back to the Contact section if no URL is set.
+
+
+## Social URLs — fixed
+The public social icons now open actual URLs in a new tab. Unconfigured icons are hidden (they no longer jump to #contact).
+1. Open /admin/ and edit **Profile & About**. Paste full links, for example `https://www.linkedin.com/in/YOUR-HANDLE/`.
+2. In **Backup & Publish**, click **Download site-data.json for GitHub publishing**.
+3. Replace the repository's `site-data.json` on GitHub, commit changes to `main`.
+4. Hard-refresh the live site (`Ctrl+Shift+R`).
+GitHub Pages does not automatically receive browser-local dashboard edits. Do not upload an entire ZIP just to change links.
