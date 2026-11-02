@@ -1,0 +1,99 @@
+{
+  "profile": {
+    "name": "Kanil Kanchana",
+    "role": "WEB DEVELOPMENT / BACKEND / AI",
+    "intro": "Learning with curiosity. Building practical digital experiences and exploring intelligent systems.",
+    "location": "Warakapola, Sri Lanka",
+    "education": "HND — NIBM, KIC",
+    "availability": "Open to internship opportunities",
+    "journey": "I’m Kanil Kanchana, a Computer Science with AI student with a strong interest in building useful websites, backend systems and practical applications.\n\nThrough projects in Laravel, PHP, Python and image processing, I’m developing my ability to turn ideas into working software and solve real-world problems.\n\nI’m continuing to learn, improve my technical skills and prepare for a career in software development.",
+    "email": "",
+    "github": "",
+    "linkedin": "",
+    "facebook": "",
+    "instagram": "",
+    "whatsapp": "",
+    "phone": "",
+    "website": "",
+    "photo": "assets/images/profile/kanil-profile.png"
+  },
+  "skills": [
+    {
+      "name": "Python & Image Processing",
+      "category": "AI",
+      "level": 82
+    },
+    {
+      "name": "Laravel & PHP",
+      "category": "Backend",
+      "level": 88
+    },
+    {
+      "name": "HTML & CSS",
+      "category": "Web",
+      "level": 78
+    },
+    {
+      "name": "SQLite & Data Management",
+      "category": "Database",
+      "level": 75
+    }
+  ],
+  "tools": [
+    "Python & JupyterLab",
+    "Laravel & PHP",
+    "SQLite",
+    "Anaconda",
+    "VS Code / Development Tools",
+    "Web & Backend Development"
+  ],
+  "projects": [
+    {
+      "title": "CCS — POS & Repair System",
+      "type": "Client system",
+      "description": "Laravel-based sales, inventory, repair jobs, credit tracking, serial numbers and warranty workflows.",
+      "tags": "Laravel, PHP, SQLite",
+      "url": "",
+      "image": "assets/images/projects/project-01.jpg"
+    },
+    {
+      "title": "Palm-Line Detection",
+      "type": "AI experiment",
+      "description": "Python and Jupyter image-processing project for isolating, detecting and counting major palm lines.",
+      "tags": "Python, Jupyter, Image Processing",
+      "url": "",
+      "image": "assets/images/projects/project-02.jpg"
+    },
+    {
+      "title": "MovieStream",
+      "type": "Personal website",
+      "description": "A personal movie website reflecting my interest in developing and maintaining web experiences.",
+      "tags": "Web Development, Personal Project",
+      "url": "https://moviestream.my",
+      "image": "assets/images/projects/project-03.jpg"
+    }
+  ],
+  "qualifications": [
+    {
+      "title": "Higher National Diploma",
+      "issuer": "Computer Science with AI — NIBM, KIC",
+      "details": "Currently studying"
+    },
+    {
+      "title": "Certificate in Computer Science with AI",
+      "issuer": "Completed qualification",
+      "details": "Foundation for further studies in computer science and artificial intelligence."
+    }
+  ],
+  "experience": [
+    {
+      "title": "Project-Based Development Experience",
+      "date": "Ongoing",
+      "description": "Building practical applications, experimenting with image processing, and learning how to develop systems for real-world workflows."
+    }
+  ],
+  "theme": {
+    "accent": "#ff681e",
+    "background": "#101113"
+  }
+}
