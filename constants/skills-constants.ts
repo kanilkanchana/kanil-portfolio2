@@ -1,0 +1,1 @@
+export const SKILL_CHIPS = ["Laravel", "PHP", "Python", "SQLite", "REST APIs", "Backend Development", "HTML", "CSS", "JavaScript", "Git", "JupyterLab", "Image Processing", "Anaconda", "Responsive Web", "Database Design", "AI Fundamentals"];

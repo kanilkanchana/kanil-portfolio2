@@ -1,0 +1,51 @@
+// Editable source adapted directly from the user-supplied Sass animation.
+// Compiled CSS for this project is already present in app/globals.css,
+// so npm install does not require Sass.
+@use 'sass:math';
+@import url("https://fonts.googleapis.com/css2?family=Oxanium&family=Amatic+SC:wght@700&family=Hachi+Maru+Pop&family=Stalemate&family=Yesteryear&display=swap");
+$ff: ("Amatic SC", "Hachi Maru Pop", "Yesteryear", "Stalemate");
+$tt: (uppercase, lowercase);
+$time: 10;
+$emptyRolls: 2;
+$spaceShift: 5;
+$dir: (1, -1);
+@mixin styles($step, $characters, $steps) {
+  @for $i from 1 through $characters {
+    --loki-shift-#{$i}: translate(#{$spaceShift * nth($dir, random(length($dir)))}px, #{$spaceShift * nth($dir, random(length($dir)))}px);
+    @if ($step + $characters * $emptyRolls - $i * $emptyRolls < $steps - $emptyRolls) {
+      --loki-font-#{$i}: #{nth($ff, random(length($ff)))};
+      --loki-transform-#{$i}: #{nth($tt, random(length($tt)))};
+    } @else {
+      --loki-font-#{$i}: "Oxanium";
+      --loki-transform-#{$i}: none;
+    }
+  }
+}
+@function getStepInc($stepCurrent) { @return math.pow($stepCurrent, 2) / 10; }
+@mixin loki-animation($name, $characters, $steps) {
+  $stepInc: (100 - getStepInc($steps)) / $steps;
+  @keyframes #{$name} {
+    @for $step from 1 through $steps {
+      $stepPercent: $step * $stepInc + getStepInc($step);
+      #{$stepPercent + "%"} { @include styles($step, $characters, $steps); }
+    }
+    to {
+      @for $i from 1 through $characters {
+        --loki-font-#{$i}: "Oxanium";
+        --loki-transform-#{$i}: none;
+        --loki-shift-#{$i}: translate(0,0);
+      }
+    }
+  }
+  .loki-roll__letter {
+    @for $i from 1 through $characters {
+      &:nth-child(#{$i}) {
+        font-family: var(--loki-font-#{$i}, "Oxanium");
+        text-transform: var(--loki-transform-#{$i}, none);
+        transform: var(--loki-shift-#{$i}, translate(0,0));
+      }
+    }
+  }
+}
+.loki-roll--hero { @include loki-animation(loki-hero-roll, 8, 25); }
+.loki-roll--name { @include loki-animation(loki-name-roll, 14, 44); }
