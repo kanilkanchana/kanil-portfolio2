@@ -34,6 +34,7 @@ type Props = {
   wordCycle?: boolean;
   fontLoop?: boolean;
   letterMorph?: boolean;
+  autoFit?: boolean;
 };
 
 type MorphSlot = {
@@ -161,6 +162,7 @@ const DirectWordMorph: FC<{
   wordCycle: boolean;
   fontLoop: boolean;
   letterMorph: boolean;
+  autoFit: boolean;
 }> = ({
   words,
   className,
@@ -172,6 +174,7 @@ const DirectWordMorph: FC<{
   wordCycle,
   fontLoop,
   letterMorph,
+  autoFit,
 }) => {
   const [index, setIndex] = useState(0);
   const currentWord = words[index % words.length] || "Web Apps";
@@ -374,10 +377,15 @@ const DirectWordMorph: FC<{
   useEffect(() => clearTimers, [clearTimers]);
 
   const ariaText = slots.map((slot) => slot.char).join("");
+  const visibleLength = Math.max(Array.from(ariaText.trim()).length, 1);
+  const fit = autoFit ? clamp(13 / visibleLength, 0.5, 1) : 1;
+  const fitStyle = autoFit
+    ? { fontSize: `clamp(2rem, ${8.2 * fit}vw, ${6 * fit}rem)` }
+    : undefined;
 
   if (!enabled) {
     return (
-      <span className={`kanil-direct-morph ${className}`} aria-label={words[0]}>
+      <span className={`kanil-direct-morph ${className}`} aria-label={words[0]} style={fitStyle}>
         {Array.from(words[0] || "Web Apps").map((char, position) => (
           <span
             key={`${position}-${char}`}
@@ -403,7 +411,7 @@ const DirectWordMorph: FC<{
   }
 
   return (
-    <span className={`kanil-direct-morph ${className}`} aria-label={ariaText}>
+    <span className={`kanil-direct-morph ${className}`} aria-label={ariaText} style={fitStyle}>
       {slots.map((slot, position) => {
         const isSpace = slot.char === " ";
         return (
@@ -452,6 +460,7 @@ export const LokiTitle: FC<Props> = ({
   wordCycle = true,
   fontLoop = true,
   letterMorph = true,
+  autoFit = true,
 }) => {
   const signature = words.join("\u001f");
   const items = useMemo(() => cleanWords(words), [signature, words]);
@@ -482,6 +491,7 @@ export const LokiTitle: FC<Props> = ({
       wordCycle={wordCycle}
       fontLoop={fontLoop}
       letterMorph={letterMorph}
+      autoFit={autoFit}
     />
   );
 };
