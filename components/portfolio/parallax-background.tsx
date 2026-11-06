@@ -76,7 +76,7 @@ export const ParallaxBackground: FC = () => {
             <motion.div
               aria-hidden
               className="absolute -inset-[4%] -z-40"
-              style={{ x: farX, y: mountain3ScrollY, translateY: farY }}
+              style={{ x: farX, y: mountain3ScrollY }}
             >
               <Image src="/assets/mountain-3.webp" alt="" fill sizes={LAYER_SIZES} className="object-cover object-bottom" />
             </motion.div>
@@ -84,7 +84,7 @@ export const ParallaxBackground: FC = () => {
             <motion.div
               aria-hidden
               className="absolute -inset-[4%] -z-30"
-              style={{ x: nearX, y: planetsScrollY, translateY: nearY }}
+              style={{ x: nearX, y: planetsScrollY }}
             >
               <Image src="/assets/planets.webp" alt="" fill sizes={LAYER_SIZES} className="object-cover object-bottom" />
             </motion.div>
