@@ -36,9 +36,7 @@ export const ParallaxBackground: FC = () => {
   const skyX = useTransform(mouseX, [-0.5, 0.5], ["-1.2%", "1.2%"]);
   const skyY = useTransform(mouseY, [-0.5, 0.5], ["-0.8%", "0.8%"]);
   const farX = useTransform(mouseX, [-0.5, 0.5], ["-2.2%", "2.2%"]);
-  const farY = useTransform(mouseY, [-0.5, 0.5], ["-1.5%", "1.5%"]);
   const nearX = useTransform(mouseX, [-0.5, 0.5], ["-3.6%", "3.6%"]);
-  const nearY = useTransform(mouseY, [-0.5, 0.5], ["-2.4%", "2.4%"]);
 
   const mountain3ScrollY = useTransform(scroll, [0, 0.6], ["0%", "16%"]);
   const planetsScrollY = useTransform(scroll, [0, 0.6], ["0%", "9%"]);
