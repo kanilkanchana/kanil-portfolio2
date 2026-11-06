@@ -14,7 +14,7 @@ const delay = (seconds: number): CSSProperties => ({
 
 export const HeroText: FC = () => {
   const cms=useCms();
-  const font={ enabled: cms.animation.enabled, duration: cms.animation.duration, holdDuration: cms.animation.holdDuration, rhythm: cms.animation.rhythm, fontWeight: cms.animation.fontWeight, wordCycle:cms.animation.wordCycle, fontLoop:cms.animation.fontLoop,letterMorph:cms.animation.letterMorph };
+  const font={ enabled: cms.animation.enabled, duration: cms.animation.duration, holdDuration: cms.animation.holdDuration, rhythm: cms.animation.rhythm, fontWeight: cms.animation.fontWeight, wordCycle:cms.animation.wordCycle, fontLoop:cms.animation.fontLoop,letterMorph:cms.animation.letterMorph, autoFit:cms.animation.heroAutoFit };
   return (
     <div className="z-10 mt-24 text-center md:mt-32 md:text-left max-w-3xl">
       <div className="flex-col hidden md:flex c-space">
