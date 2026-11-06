@@ -672,7 +672,11 @@ body {
 .kanil-cursor-ring {position:fixed;left:0;top:0;z-index:99;pointer-events:none;width:35px;height:35px;border-radius:50%;border:1px solid rgba(107,214,255,.58);transform:translate3d(-100px,-100px,0) translate(-50%,-50%);opacity:0;transition:opacity .2s ease,width .2s ease,height .2s ease,border-color .2s ease;}
 .kanil-cursor-ring--visible{opacity:1;}
 .kanil-cursor-ring--hover{width:52px;height:52px;border-color:rgba(130,250,250,.8);}
-@media (pointer:coarse),(prefers-reduced-motion:reduce){.kanil-cursor,.kanil-cursor-ring,.kanil-meteor{display:none!important;}}
+@media (pointer:coarse){.kanil-cursor,.kanil-cursor-ring{display:none!important;}}
+@media (prefers-reduced-motion:reduce){
+  .kanil-cursor,.kanil-cursor-ring{display:none!important;}
+  .kanil-meteor{animation:none!important;opacity:.5!important;}
+}
 
 .kanil-photo-card-wrap { min-width:0; display:flex; flex-direction:column; align-items:center; gap:12px; }
 .kanil-photo-card-wrap .kanil-photo-card { flex:none; }
@@ -878,4 +882,101 @@ body {
   .kanil-direct-morph__space,
   .kanil-direct-morph__glyph,
   .kanil-name-kinetic__glyph { transition: none !important; }
+}
+
+
+/* 2026-11 final responsive polish: keep hero text, meteors and contact usable on phones. */
+.kanil-direct-morph {
+  max-width: 100%;
+  transform-origin: left center;
+}
+.kanil-hero-layout > :first-child,
+.kanil-hero-layout > :last-child {
+  min-width: 0;
+}
+#contact .glass {
+  width: 100%;
+}
+#contact input,
+#contact textarea,
+#contact button {
+  max-width: 100%;
+}
+
+@media (max-width: 767px) {
+  #home { min-height: auto; }
+  .kanil-hero-layout {
+    min-height: auto;
+    padding: 5.75rem 1rem 2.5rem;
+    gap: 1.5rem;
+    overflow: hidden;
+  }
+  .kanil-hero-layout > :first-child {
+    text-align: center;
+  }
+  .kanil-direct-morph {
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+  }
+  .kanil-direct-morph__slot,
+  .kanil-direct-morph__space {
+    flex-shrink: 1;
+  }
+  .kanil-photo-card {
+    height: clamp(330px, 112vw, 470px);
+    border-radius: 26px;
+  }
+  .kanil-photo-card__inner { border-radius: 23px; }
+  .kanil-photo-card__corner { width: 48px; height: 48px; }
+  .kanil-photo-nameplate {
+    width: 100%;
+    max-width: 470px;
+    padding-inline: 10px;
+  }
+  .kanil-photo-name {
+    font-size: clamp(1.05rem, 5.5vw, 1.55rem);
+  }
+
+  .section-spacing {
+    min-height: auto;
+    margin-top: 4.5rem;
+  }
+  #contact {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  #contact .text-heading {
+    font-size: clamp(2rem, 10vw, 2.75rem);
+  }
+
+  .kanil-meteor {
+    width: min(var(--meteor-length, 120px), 110px);
+    filter: drop-shadow(0 0 4px rgba(40,194,255,.85));
+  }
+  .kanil-meteor-tech {
+    top: -25px;
+    right: -8px;
+    padding: 2px 6px;
+    font-size: 9px;
+    line-height: 14px;
+    letter-spacing: .03em;
+  }
+  .kanil-meteor:nth-of-type(n+25) {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .kanil-hero-layout {
+    padding-left: .8rem;
+    padding-right: .8rem;
+  }
+  .kanil-photo-card {
+    height: clamp(310px, 118vw, 430px);
+  }
+  #contact {
+    padding-left: .75rem;
+    padding-right: .75rem;
+  }
 }
