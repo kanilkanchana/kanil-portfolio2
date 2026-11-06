@@ -43,8 +43,10 @@ export type CmsData = {
   subtitle: string;
   availability: string;
   heroWords: string[];
+  meteorWords: string[];
   animation: {
     enabled: boolean;
+    heroAutoFit: boolean;
     nameEnabled: boolean;
     duration: number;
     holdDuration: number;
@@ -76,9 +78,11 @@ export const DEFAULT_CMS: CmsData = {
   lead: "Web Apps",
   subtitle: "web & backend systems.",
   availability: "Open to internship opportunities",
-  heroWords: ["Web Apps", "Backend", "Python", "Laravel", "PHP", "AI Systems"],
+  heroWords: ["Web Apps", "Backend", "REST APIs", "Laravel", "AI Systems", "Scalable APIs"],
+  meteorWords: ["PHP", "Python", "Laravel", "React", "Next.js", "JavaScript", "TypeScript", "SQL", "REST API", "Node.js", "HTML", "CSS", "Docker", "Git", "OpenCV", "AI"],
   animation: {
     enabled: true,
+    heroAutoFit: true,
     nameEnabled: true,
     duration: 5.5,
     holdDuration: 2.2,
@@ -163,6 +167,10 @@ export function normalizeCms(raw: unknown): CmsData {
       Array.isArray(r.heroWords) && r.heroWords.length
         ? r.heroWords.filter((x) => typeof x === "string").slice(0, 15)
         : DEFAULT_CMS.heroWords,
+    meteorWords:
+      Array.isArray(r.meteorWords) && r.meteorWords.length
+        ? r.meteorWords.filter((x) => typeof x === "string" && x.trim()).slice(0, 40)
+        : DEFAULT_CMS.meteorWords,
     skills: Array.isArray(r.skills) ? r.skills : DEFAULT_CMS.skills,
     projects: Array.isArray(r.projects) ? r.projects : DEFAULT_CMS.projects,
     services: Array.isArray(r.services) ? r.services : DEFAULT_CMS.services,
