@@ -39,8 +39,21 @@ export const Editor=({initial,email}:{initial:CmsData;email:string})=>{
     <button className={`${btn} mt-3`} onClick={()=>patch({heroWords:[...d.heroWords,'New Word']})}>+ Add word</button>
   </div>
 
+  <div className="rounded-2xl border border-violet-400/20 bg-violet-300/5 p-5">
+    <h3 className="mb-2 text-lg font-semibold">Meteor word labels</h3>
+    <p className="mb-4 text-sm text-slate-400">Every visible meteor uses one word from this list. Add as many technology labels as you want; the list repeats automatically across the meteor field.</p>
+    <div className="grid gap-2 md:grid-cols-2">
+      {d.meteorWords.map((word,i)=><div key={i} className="flex gap-2">
+        <input className={inp} value={word} onChange={e=>patch({meteorWords:d.meteorWords.map((v,j)=>j===i?e.target.value:v)})}/>
+        <button className={btn} onClick={()=>patch({meteorWords:d.meteorWords.filter((_,j)=>j!==i)})}>✕</button>
+      </div>)}
+    </div>
+    <button className={`${btn} mt-3`} onClick={()=>patch({meteorWords:[...d.meteorWords,'New Tech']})}>+ Add meteor word</button>
+  </div>
+
   <div className="grid gap-4 md:grid-cols-2">
     <label className="flex items-center gap-3"><input type="checkbox" checked={d.animation.enabled} onChange={e=>patch({animation:{...d.animation,enabled:e.target.checked}})}/> Enable hero morph effect</label>
+    <label className="flex items-center gap-3"><input type="checkbox" checked={d.animation.heroAutoFit} onChange={e=>patch({animation:{...d.animation,heroAutoFit:e.target.checked}})}/> Auto-fit long hero words inside the text column</label>
     <label className="flex items-center gap-3"><input type="checkbox" checked={d.animation.wordCycle} onChange={e=>patch({animation:{...d.animation,wordCycle:e.target.checked}})}/> Auto-change words</label>
     <label className="flex items-center gap-3"><input type="checkbox" checked={d.animation.fontLoop} onChange={e=>patch({animation:{...d.animation,fontLoop:e.target.checked}})}/> Shuffle font styles while morphing</label>
     <label className="flex items-center gap-3"><input type="checkbox" checked={d.animation.letterMorph} onChange={e=>patch({animation:{...d.animation,letterMorph:e.target.checked}})}/> Lock letters left-to-right</label>
