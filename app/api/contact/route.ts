@@ -90,7 +90,7 @@ export async function POST(req: Request) {
     return NextResponse.json(
       {
         error: tableMissing
-          ? "The database is connected but not set up yet. Run supabase/migrations/0001_init.sql in the Supabase SQL editor."
+          ? "The contact inbox table is missing. Run supabase/migrations/0005_contact_inbox_live_fix.sql once in the Supabase SQL editor."
           : "Could not save your message. Please try again.",
       },
       { status: 500 }
