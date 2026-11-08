@@ -481,8 +481,11 @@ body {
 .kanil-hero-layout .c-space { padding-left: 0; padding-right: 0; }
 .kanil-photo-card {
   position: relative;
-  width: 100%;
-  height: clamp(460px, 63vh, 710px);
+  width: min(100%, 560px);
+  aspect-ratio: 1024 / 1159;
+  height: auto;
+  max-height: 68vh;
+  margin-inline: auto;
   border-radius: 34px;
   padding: 3px;
   background: linear-gradient(130deg, #bd7bff, #e8a3ff 38%, #70e8ff 92%);
@@ -503,10 +506,9 @@ body {
   background: radial-gradient(circle, rgba(154,99,179,.46) 0%, rgba(140,69,135,.16) 53%, transparent 72%);
 }
 .kanil-photo-card__portrait {
-  object-fit: contain;
-  object-position: bottom center;
+  object-fit: cover;
+  object-position: 50% 38%;
   z-index: 2;
-  /* Preserve the original photo aspect ratio: do not crop, distort or animate. */
 }
 .kanil-photo-card__corner {position:absolute;z-index:3;width:65px;height:65px;pointer-events:none;}
 .kanil-photo-card__corner--tl {top:22px;left:22px;border-top:3px solid #db9eff;border-left:3px solid #db9eff;border-radius:18px 0 0 0;}
@@ -520,7 +522,7 @@ body {
 }
 @media (max-width: 767px) {
   .kanil-hero-layout {grid-template-columns:minmax(0,1fr);gap:2rem;padding:6.5rem 1rem 3rem;}
-  .kanil-photo-card {width:min(100%,470px);height:clamp(380px,100vw,560px);margin-inline:auto;}
+  .kanil-photo-card {width:min(100%,470px);aspect-ratio:1024 / 1159;height:auto;max-height:none;margin-inline:auto;}
   .kanil-hero-layout > :first-child {width:100%;}
 }
 @media (prefers-reduced-motion: reduce) {
@@ -678,7 +680,7 @@ body {
   .kanil-meteor{animation:none!important;opacity:.5!important;}
 }
 
-.kanil-photo-card-wrap { min-width:0; display:flex; flex-direction:column; align-items:center; gap:12px; }
+.kanil-photo-card-wrap { min-width:0; width:100%; max-width:580px; justify-self:center; display:flex; flex-direction:column; align-items:center; gap:12px; }
 .kanil-photo-card-wrap .kanil-photo-card { flex:none; }
 .kanil-photo-nameplate { width:min(94%,560px); text-align:center; padding:12px 24px; border:1px solid rgba(101,225,255,.43); border-radius:16px; background:linear-gradient(100deg,rgba(5,21,46,.9),rgba(23,35,67,.75)); box-shadow:0 0 24px rgba(23,165,231,.15); color:#dff9ff; }
 .kanil-photo-name { font-size:clamp(1.5rem,2.7vw,2.35rem); letter-spacing:.018em; font-weight:800; }
@@ -924,8 +926,11 @@ body {
     flex-shrink: 1;
   }
   .kanil-photo-card {
-    height: clamp(330px, 112vw, 470px);
-    border-radius: 26px;
+    width:min(100%,430px);
+    aspect-ratio:1024 / 1159;
+    height:auto;
+    max-height:none;
+    border-radius:26px;
   }
   .kanil-photo-card__inner { border-radius: 23px; }
   .kanil-photo-card__corner { width: 48px; height: 48px; }
@@ -969,7 +974,9 @@ body {
     padding-right: .8rem;
   }
   .kanil-photo-card {
-    height: clamp(310px, 118vw, 430px);
+    width:min(100%,390px);
+    aspect-ratio:1024 / 1159;
+    height:auto;
   }
   #contact {
     padding-left: .75rem;
